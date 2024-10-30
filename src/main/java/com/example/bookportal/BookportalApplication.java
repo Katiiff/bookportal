@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BookportalApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(BookportalApplication.class, args);
 	}
 
