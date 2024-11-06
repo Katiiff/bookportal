@@ -20,5 +20,11 @@
     Описание: <input type="text" name="description"><br><br>
     <input type="submit" value="Добавить в библиотеку"/>
 </form>
+<hr>
+<h3>Поиск книг по автору</h3>
+<form action="/api/search/author" method="get">
+    Автор: <input type="text" name="author"><br><br>
+    <input type="submit" value="Поиск"/>
+</form>
 </body>
 </html>

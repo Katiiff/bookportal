@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -20,12 +21,6 @@ public class ProductController {
     public String products(Model model) {
         model.addAttribute("products", productService.listProducts());
         return "products";
-    }
-
-    @GetMapping("/api")
-    public List<Product> productss() {
-
-        return productService.listProducts();
     }
 
     @GetMapping("/product/{id}")
@@ -45,6 +40,13 @@ public class ProductController {
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return "redirect:/";
+    }
+
+    @GetMapping("/search/author")
+    public String searchByAuthor(@RequestParam String author, Model model) {
+        List<Product> products = productService.findByAuthor(author);
+        model.addAttribute("products", products);
+        return "index";
     }
 
 }
