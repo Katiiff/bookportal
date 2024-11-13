@@ -8,7 +8,14 @@
 <h4>Доступные книги:</h4>
 <#list products as product>
     <div>
-        <p><b>${product.title} ${product.author}</b> | <a href="/product/${product.id}">Далее к описанию..</a></p>
+        <p><b>${product.title} ${product.author.name!}</b> | <a href="/product/${product.id}">Далее к описанию..</a></p>
+    </div>
+</#list>
+
+<h4>Доступные авторы:</h4>
+<#list authors as author>
+    <div>
+        <p><b>${author.getFullName()} </b> | <a href="/author/${author.id}">Далее к книгам..</a></p>
     </div>
 </#list>
 <hr>
@@ -25,6 +32,12 @@
 <form action="/api/search/author" method="get">
     Автор: <input type="text" name="author"><br><br>
     <input type="submit" value="Поиск"/>
+</form>
+<hr>
+<h3>Добавить автора</h3>
+<form action="/api/authors/create" method="post">
+    Имя автора: <input type="text" name="name"><br><br>
+    <input type="submit" value="Добавить автора"/>
 </form>
 </body>
 </html>

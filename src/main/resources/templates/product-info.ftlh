@@ -9,7 +9,7 @@
 <hr>
 
 <b>Название: </b>${product.title}<br>
-<b>Автор: </b>${product.author}<br>
+<b>Автор: </b>${product.author.getFullName()}<br>
 <b>Описание: </b>${product.description}<br>
 <b>Жанр: </b>${product.genre}<br>
 <hr>
