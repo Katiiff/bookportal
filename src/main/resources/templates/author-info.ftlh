@@ -9,15 +9,16 @@
 <hr>
 
 <b>Имя: </b>${author.getFullName()}<br>
-<#list products as product>
+<h5>Доступные книги этого автора:</h5>
+<#list products as productDTO>
     <div>
-        <p><b>Книги: ${product.title} ${product.author.name!}</b> </p>
+        <p><b>${productDTO.title()} ${productDTO.authorDTO().name!}</b> </p>
     </div>
 </#list>
 <hr>
-<form action="/author/delete/${author.id}" method="post">
-
-<input type="submit" value="Удалить"/>
+<form action="/api/authors/delete/${author.id}" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Удалить"/>
 </form>
 </body>
 </html>

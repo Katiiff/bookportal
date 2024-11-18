@@ -6,16 +6,16 @@
 <body>
 <h1>BOOKPORTAL</h1><hr>
 <h4>Доступные книги:</h4>
-<#list products as product>
+<#list products as productDTO>
     <div>
-        <p><b>${product.title} ${product.author.name!}</b> | <a href="/product/${product.id}">Далее к описанию..</a></p>
+        <p><b>${productDTO.title()} ${productDTO.authorDTO().name!}</b> | <a href="/product/${productDTO.id()}">Далее к описанию..</a></p>
     </div>
 </#list>
 
 <h4>Доступные авторы:</h4>
-<#list authors as author>
+<#list authors as authorDTO>
     <div>
-        <p><b>${author.getFullName()} </b> | <a href="/author/${author.id}">Далее к книгам..</a></p>
+        <p><b>${authorDTO.getFullName()} </b> | <a href="/author/${authorDTO.id()}">Далее к книгам..</a></p>
     </div>
 </#list>
 <hr>
@@ -37,6 +37,7 @@
 <h3>Добавить автора</h3>
 <form action="/api/authors/create" method="post">
     Имя автора: <input type="text" name="name"><br><br>
+    Фамилия автора: <input type="text" name="surname"><br><br>
     <input type="submit" value="Добавить автора"/>
 </form>
 </body>
