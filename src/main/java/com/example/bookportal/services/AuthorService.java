@@ -2,7 +2,6 @@ package com.example.bookportal.services;
 
 import com.example.bookportal.exceptions.ResourceNotFoundException;
 import com.example.bookportal.models.Author;
-import com.example.bookportal.models.Product;
 import com.example.bookportal.repositories.AuthorRepository;
 import com.example.bookportal.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,17 +37,10 @@ public class AuthorService {
     }
 
     public Author updateAuthor(Long id, Author updatedAuthor) {
-        return authorRepository.findById(id)
-                .map(author -> {
-                    author.setName(updatedAuthor.getName());
-                    author.setSurname(updatedAuthor.getSurname());
-                    return saveAuthor(author);
-                })
-                .orElseThrow(() -> new ResourceNotFoundException("Author not found with id " + id));
-    }
-
-    public List<Product> getProductsByAuthor(Author author) {
-        return productRepository.findByAuthor(author);
+        Author author = getAuthorById(id);
+        author.setName(updatedAuthor.getName());
+        author.setSurname(updatedAuthor.getSurname());
+        return saveAuthor(author);
     }
 
     public Author findOrCreateAuthor(String name, String surname) {

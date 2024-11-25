@@ -70,4 +70,8 @@ public class ProductService {
                 .toList();
     }
 
+    public List<Product> getProductsByAuthor(Author author) {
+        return productRepository.findByAuthor(author);
+    }
+
 }
