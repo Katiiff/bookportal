@@ -5,8 +5,6 @@ import com.example.bookportal.models.ProductDTO;
 import com.example.bookportal.services.ProductService;
 import com.example.bookportal.utils.ProductDTOMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,9 +23,9 @@ public class ProductApiController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
+    public ProductDTO createProduct(@RequestBody ProductDTO productDTO) {
         Product createdProduct = productService.saveProduct(productDTOMapper.toEntity(productDTO));
-        return ResponseEntity.status(HttpStatus.CREATED).body(productDTOMapper.apply(createdProduct));
+        return productDTOMapper.apply(createdProduct);
     }
 
     @GetMapping("/{id}")
@@ -41,9 +39,8 @@ public class ProductApiController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+    public void deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
-        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/search/author")
