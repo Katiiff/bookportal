@@ -15,11 +15,9 @@ import java.util.stream.Collectors;
 @Service
 public class AuthorDTOMapper implements Function<Author, AuthorDTO> {
     private final ProductService productService;
-    private final ProductDTOMapper productDTOMapper;
 
     public AuthorDTOMapper(ProductService productService, ProductDTOMapper productDTOMapper) {
         this.productService = productService;
-        this.productDTOMapper = productDTOMapper;
     }
 
     @Override
@@ -28,14 +26,14 @@ public class AuthorDTOMapper implements Function<Author, AuthorDTO> {
                 .map(Product::getId)
                 .collect(Collectors.toList());
 
-        List<ProductDTO> products = productService.getProductsByIds(productIds);
+        List<Product> products = productService.getProductsByIds(productIds);
 
         return new AuthorDTO(
                 author.getId(),
                 author.getName(),
                 author.getSurname(),
                 products.stream()
-                        .map(ProductDTO::id)
+                        .map(Product::getId)
                         .collect(Collectors.toList())
         );
     }
@@ -58,5 +56,17 @@ public class AuthorDTOMapper implements Function<Author, AuthorDTO> {
         }
         author.setProducts(products);
         return author;
+    }
+
+    public List<AuthorDTO> toDTOs(List<Author> authors) {
+        return authors.stream()
+                .map(this::apply)
+                .collect(Collectors.toList());
+    }
+
+    public List<Author> toEntities(List<AuthorDTO> authorDTOs) {
+        return authorDTOs.stream()
+                .map(this::toEntity)
+                .collect(Collectors.toList());
     }
 }
