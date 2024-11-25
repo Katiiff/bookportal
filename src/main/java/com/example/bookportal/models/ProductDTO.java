@@ -5,7 +5,7 @@ public record ProductDTO (
         String title,
         String genre,
         String description,
-        Author authorDTO
+        AuthorDTO authorDTO
 ) {
 
-    }
+}

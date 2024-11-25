@@ -1,7 +1,5 @@
 package com.example.bookportal.models;
 
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
-
 import java.util.List;
 
 public record AuthorDTO (
@@ -13,5 +11,4 @@ public record AuthorDTO (
     public String getFullName() {
         return name + " " + surname;
     }
-    
 }
